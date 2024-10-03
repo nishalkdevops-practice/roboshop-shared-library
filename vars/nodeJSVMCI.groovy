@@ -87,14 +87,17 @@ def call(Map configMap){
 
             //here below we need to configure the downstream job, Above we have the CI (upstream job)
             //this job will wait untill the downstream job is over
-
+            //bydefault a non master branch CI is done we can go for dev deployment 
+            
             stage('Deploy') {
             steps {
 
                     script{ 
                         echo "Deployment..."
                         def params = [
-                            string(name: 'version', value: "$packageVersion")
+                            string(name: 'version', value: "$packageVersion"),
+                            string(name: 'environment', value: "dev")
+
                     ]
                     build job: "../${component}-deploy/", wait: true, parameters: params
                     }
