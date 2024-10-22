@@ -10,6 +10,10 @@ def decidepipeline(Map configMap){
             echo "Application is nodeJS and VM based"
             nodeJSVMCI(configMap)
             break
+        case 'nodeJSEKS':
+            echo "Application is nodeJS and K8 cluster based"
+            nodeJSEKS(configMap)
+            break
         case 'JavaVM':
             javaVMCI(configMap)
             break
