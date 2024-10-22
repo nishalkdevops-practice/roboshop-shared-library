@@ -7,7 +7,7 @@ def call(Map configMap){
 
 
     pipeline {
-        agent { node { label 'Agent-1' } }
+        agent { node { label 'Agent' } }
         options {
             timeout(time: 1, unit: 'HOURS')
         }
@@ -70,7 +70,7 @@ def call(Map configMap){
                     nexusArtifactUploader(
                         nexusVersion: 'nexus3',
                         protocol: 'http',
-                        nexusUrl: '172.31.89.51:8081/',
+                        nexusUrl: '172.31.38.57:8081/',
                         groupId: 'com.roboshop',
                         version: "$packageVersion",
                         repository: "${component}",
