@@ -102,6 +102,20 @@ def call(Map configMap){
                 steps {
                     script{
                         sh """
+                            cd helm
+                            sed -i 's/IMAGE_VERSION/$packageVersion/g' values.yaml
+                            helm install ${component} .  
+
+                        """
+                    }
+    
+                }
+            }
+
+            stage('EKS Deploy') {
+                steps {
+                    script{
+                        sh """
                             docker push  nishaldevops/${component}:${packageVersion} 
 
                         """
