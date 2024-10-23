@@ -97,8 +97,20 @@ def call(Map configMap){
                 }
             }
 
+            stage('Docker Push') {
+                steps {
+                    script{
+                        sh """
+                            docker push  nishaldevops/${component}:${packageVersion} 
+
+                        """
+                    }
+    
+                }
+            }
+
             // just make sure you login inside agent
-            stage('Docker push') {
+            stage('EKS Deploy') {
                 steps {
                     script{
                         sh """
@@ -112,17 +124,6 @@ def call(Map configMap){
                 }
             }
 
-            stage('EKS Deploy') {
-                steps {
-                    script{
-                        sh """
-                            docker push  nishaldevops/${component}:${packageVersion} 
-
-                        """
-                    }
-    
-                }
-            }
 
             //here below we need to configure the downstream job, Above we have the CI (upstream job)
             //this job will wait untill the downstream job is over
